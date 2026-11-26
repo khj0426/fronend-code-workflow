@@ -40,7 +40,42 @@ $frontend-workflow 검색 결과 필터를 URL과 동기화해줘.
 $frontend-workflow 이 회원가입 폼의 중복 제출 버그를 고쳐줘.
 ```
 
+요구사항부터 검증 근거까지 추적하려면 `strict`를 명시합니다.
+
+```text
+$frontend-workflow strict 결제 폼의 오류 처리를 개선해줘.
+```
+
 자동 스킬 선택이 활성화된 환경에서는 일반적인 프론트엔드 변경 요청에도 선택될 수 있습니다.
+
+## Strict 모드
+
+Strict 모드는 수용 기준을 구현과 검증까지 연결해야 하는 작업에 사용합니다. 인증, 권한, 결제, 개인정보, 공용 컴포넌트 API, 라우팅·데이터 계약 변경, 단계적 이전처럼 실패 비용이나 영향 범위가 큰 작업에서는 Codex가 strict 모드를 자동으로 추천합니다.
+
+추천만으로 strict 모드가 활성화되지는 않습니다. 사용자가 승인하거나 프롬프트에 직접 `strict`를 적은 경우에만 다음 산출물을 만듭니다.
+
+```text
+docs/frontend-workflow/<feature-slug>/
+├── spec.md
+├── plan.md
+├── journal.md
+└── trace.yaml
+```
+
+- `spec.md`: 사용자 시나리오, `AC-001` 형식의 수용 기준, UI 상태, 제외 범위
+- `plan.md`: 작업과 수용 기준, 검증 방법의 연결
+- `journal.md`: 중요한 관찰, 결정, 버린 대안, 검증 결과
+- `trace.yaml`: 수용 기준별 구현 파일, 테스트·수동 검증, 현재 상태
+
+추적 파일은 외부 Python 패키지 없이 검사할 수 있습니다.
+
+```text
+python3 <skill-path>/scripts/check_trace.py \
+  docs/frontend-workflow/<feature-slug>/trace.yaml \
+  --root .
+```
+
+검사는 ID 중복, 상태, 검증 근거, 기록된 파일의 존재를 확인합니다. 테스트의 내용이나 구현 품질까지 증명하지는 않습니다.
 
 ## 작업 흐름
 
@@ -62,11 +97,20 @@ $frontend-workflow 이 회원가입 폼의 중복 제출 버그를 고쳐줘.
 skills/frontend-workflow/
 ├── SKILL.md
 ├── agents/openai.yaml
-└── references/
-    ├── specification.md
-    ├── implementation.md
-    ├── verification.md
-    └── review.md
+├── assets/templates/
+│   ├── spec.md
+│   ├── plan.md
+│   ├── journal.md
+│   └── trace.yaml
+├── references/
+│   ├── specification.md
+│   ├── implementation.md
+│   ├── verification.md
+│   ├── review.md
+│   └── strict-mode.md
+└── scripts/
+    ├── check_trace.py
+    └── test_check_trace.py
 ```
 
 - `SKILL.md`: 작업 분류와 전체 흐름
@@ -74,7 +118,10 @@ skills/frontend-workflow/
 - `implementation.md`: 수직 단위 구현과 위험 상승 기준
 - `verification.md`: 변경 유형별 코드·브라우저 검증
 - `review.md`: 요구사항, 회귀, 복잡성 최종 점검
+- `strict-mode.md`: 추적 가능한 엄격 모드의 활성화 조건과 절차
+- `assets/templates`: 프로젝트에 복사해 사용하는 명세·계획·일지·추적 템플릿
+- `check_trace.py`: 수용 기준과 검증 근거의 구조 검사
 
 ## 현재 범위
 
-첫 버전은 하나의 워크플로 스킬만 제공합니다. 별도 리뷰 에이전트, 회고 스킬, CI 검사 스크립트는 실제 사용에서 반복되는 필요가 확인되면 추가합니다.
+첫 버전은 하나의 워크플로 스킬과 선택형 strict 모드를 제공합니다. 별도 리뷰 에이전트, 회고 스킬, CI 자동 연결은 실제 사용에서 반복되는 필요가 확인되면 추가합니다.

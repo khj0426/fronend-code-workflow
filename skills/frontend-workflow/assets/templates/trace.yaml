@@ -1,0 +1,11 @@
+feature: feature-slug
+acceptance:
+  - id: AC-001
+    status: pending
+    implementation:
+      - path/to/implementation.tsx
+    tests:
+      - path/to/implementation.test.tsx
+    manual:
+      - 브라우저에서 확인할 동작
+    excluded_reason:
