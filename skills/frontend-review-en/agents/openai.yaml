@@ -1,0 +1,4 @@
+interface:
+  display_name: "Frontend Review (English)"
+  short_description: "Review frontend changes for evidence-based defects"
+  default_prompt: "Use $frontend-review-en to review this frontend change for defects and regressions."

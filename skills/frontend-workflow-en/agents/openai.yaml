@@ -1,0 +1,4 @@
+interface:
+  display_name: "Frontend Workflow (English)"
+  short_description: "Plan, implement, and verify frontend changes safely"
+  default_prompt: "Use $frontend-workflow-en to plan, implement, and verify this frontend change."

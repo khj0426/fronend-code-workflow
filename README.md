@@ -9,6 +9,8 @@
 | `frontend-workflow` | 변경을 계획하고 구현하고 검증합니다. |
 | `frontend-review` | 코드를 수정하지 않고 실제 결함과 회귀를 리뷰합니다. |
 
+영어판은 동일한 기능을 `frontend-workflow-en`, `frontend-review-en`으로 제공합니다. 영어 사용 안내는 [README.en.md](README.en.md)를 참고하세요.
+
 ## 주요 원칙
 
 - 작은 스타일 변경에는 무거운 문서를 요구하지 않습니다.
@@ -32,6 +34,13 @@ https://github.com/khj0426/fronend-code-workflow/tree/main/skills/frontend-workf
 ```text
 https://github.com/khj0426/fronend-code-workflow/tree/main/skills/frontend-review
 에서 frontend-review 스킬을 설치해줘.
+```
+
+영어판은 각각 다음 경로에서 설치합니다.
+
+```text
+https://github.com/khj0426/fronend-code-workflow/tree/main/skills/frontend-workflow-en
+https://github.com/khj0426/fronend-code-workflow/tree/main/skills/frontend-review-en
 ```
 
 수동 설치 시 `skills/frontend-workflow`를 Codex의 개인 skills 디렉터리에 복사합니다.
@@ -113,15 +122,10 @@ python3 <skill-path>/scripts/check_trace.py \
 
 ```text
 skills/
-├── frontend-workflow/
-│   ├── SKILL.md
-│   ├── agents/openai.yaml
-│   ├── assets/templates/
-│   ├── references/
-│   └── scripts/
-└── frontend-review/
-    ├── SKILL.md
-    └── agents/openai.yaml
+├── frontend-workflow/       # 한국어 워크플로
+├── frontend-review/         # 한국어 리뷰
+├── frontend-workflow-en/    # 영어 워크플로
+└── frontend-review-en/      # 영어 리뷰
 ```
 
 - `SKILL.md`: 작업 분류와 전체 흐름

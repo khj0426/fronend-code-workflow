@@ -1,0 +1,13 @@
+{
+  "feature": "feature-slug",
+  "acceptance": [
+    {
+      "id": "AC-001",
+      "status": "pending",
+      "implementation": [],
+      "tests": [],
+      "manual": [],
+      "excludedReason": null
+    }
+  ]
+}
