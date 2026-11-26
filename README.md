@@ -1,8 +1,13 @@
 # frontend-code-workflow
 
-기존 프론트엔드 코드베이스에서 기능을 계획하고 구현하고 검증하는 Codex 스킬입니다.
+기존 프론트엔드 코드베이스에서 기능을 계획·구현·검증하고, 완성된 변경을 독립적으로 리뷰하는 Codex 스킬 모음입니다.
 
 코드를 바로 작성하기보다 사용자에게 보이는 결과와 관련 UI 상태를 먼저 확인합니다. 변경 위험에 따라 절차의 강도를 조절하며, 저장소에 이미 있는 테스트와 도구를 우선합니다.
+
+| 스킬 | 역할 |
+| --- | --- |
+| `frontend-workflow` | 변경을 계획하고 구현하고 검증합니다. |
+| `frontend-review` | 코드를 수정하지 않고 실제 결함과 회귀를 리뷰합니다. |
 
 ## 주요 원칙
 
@@ -20,6 +25,13 @@ Codex에게 다음과 같이 요청할 수 있습니다.
 ```text
 https://github.com/khj0426/fronend-code-workflow/tree/main/skills/frontend-workflow
 에서 frontend-workflow 스킬을 설치해줘.
+```
+
+리뷰 스킬은 별도로 설치할 수 있습니다.
+
+```text
+https://github.com/khj0426/fronend-code-workflow/tree/main/skills/frontend-review
+에서 frontend-review 스킬을 설치해줘.
 ```
 
 수동 설치 시 `skills/frontend-workflow`를 Codex의 개인 skills 디렉터리에 복사합니다.
@@ -44,6 +56,12 @@ $frontend-workflow 이 회원가입 폼의 중복 제출 버그를 고쳐줘.
 
 ```text
 $frontend-workflow strict 결제 폼의 오류 처리를 개선해줘.
+```
+
+완성된 변경을 독립적으로 리뷰하려면 다음처럼 호출합니다.
+
+```text
+$frontend-review 현재 브랜치의 프론트엔드 변경을 리뷰해줘.
 ```
 
 자동 스킬 선택이 활성화된 환경에서는 일반적인 프론트엔드 변경 요청에도 선택될 수 있습니다.
@@ -94,21 +112,16 @@ python3 <skill-path>/scripts/check_trace.py \
 ## 구조
 
 ```text
-skills/frontend-workflow/
-├── SKILL.md
-├── agents/openai.yaml
-├── assets/templates/
-│   ├── spec.md
-│   ├── plan.md
-│   ├── journal.md
-│   └── trace.json
-├── references/
-│   ├── specification.md
-│   ├── verification.md
-│   └── strict-mode.md
-└── scripts/
-    ├── check_trace.py
-    └── test_check_trace.py
+skills/
+├── frontend-workflow/
+│   ├── SKILL.md
+│   ├── agents/openai.yaml
+│   ├── assets/templates/
+│   ├── references/
+│   └── scripts/
+└── frontend-review/
+    ├── SKILL.md
+    └── agents/openai.yaml
 ```
 
 - `SKILL.md`: 작업 분류와 전체 흐름
@@ -120,4 +133,4 @@ skills/frontend-workflow/
 
 ## 현재 범위
 
-첫 버전은 하나의 워크플로 스킬과 선택형 strict 모드를 제공합니다. 별도 리뷰 에이전트, 회고 스킬, CI 자동 연결은 실제 사용에서 반복되는 필요가 확인되면 추가합니다.
+현재 버전은 워크플로 스킬, 선택형 strict 모드, 최소형 독립 리뷰 스킬을 제공합니다. 별도 리뷰 에이전트, 회고 스킬, CI 자동 연결은 실제 사용에서 반복되는 필요가 확인되면 추가합니다.
